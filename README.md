@@ -1,3 +1,8 @@
+Чтобы запустить проект, нужно выполнить в папке с файлом docker-compose.yml команду:
+sudo docker-compose up -d
+! Но в данном проекте использовался локальный image registry.
+
+
 # docker_homework
 # 1 Лекция
 Написать Dockerfile для frontend располагается в директории /frontend, собрать и запустить
