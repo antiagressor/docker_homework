@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  frontend:
+     image: localhost:5000/frontend
+     container_name: frontend
+     networks:
+        - frontend
+     ports:
+        - "3000:3000"
+     stdin_open: true
+     tty: true
+     restart: unless-stopped
+
+  backend:
+     image: localhost:5000/backend
+     container_name: backend
+     networks:
+        - backend
+     ports:
+        - "8000:8000"
+     depends_on:
+        - database
+     env_file:
+         - ./.env
+     entrypoint: ./entrypoint.sh
+     restart: unless-stopped
+
+  database:
+     image: localhost:5000/database
+     container_name: database
+     networks:
+        - backend
+     env_file:
+         - ./.env
+     restart: unless-stopped
+
+networks:
+  frontend:
+    driver: bridge
+    name: net-app-public
+  backend:
+    driver: bridge
+    name: net-app-private
